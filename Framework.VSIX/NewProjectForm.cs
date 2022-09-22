@@ -21,6 +21,7 @@ namespace Framework.VSIX
 
 		public void Initialize()
 		{
+			ThreadHelper.ThrowIfNotOnUIThread();
 			if (Package.GetGlobalService(typeof(IUIHostLocale)) is IUIHostLocale hostLocale)
 			{
 				var dlgFont = new UIDLGLOGFONT[] { new UIDLGLOGFONT() };
