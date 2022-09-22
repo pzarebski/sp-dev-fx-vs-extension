@@ -31,7 +31,7 @@ namespace Framework.VSIX
 		private string logFile;
 		private string commandString;
         private string environment;
-
+		
 		TelemetryClient telemetry = new TelemetryClient
 		{
 			InstrumentationKey = Utility.AppInsightsKey
@@ -152,8 +152,7 @@ namespace Framework.VSIX
 #if DEBUG
 			TelemetryConfiguration.Active.TelemetryChannel.DeveloperMode = true;
 #endif
-
-			try
+            try
 			{
 				//telProps.Add("generator-version", Utility.InstalledGeneratorVersion.ToString());
 				//telemetry.Context.Operation.Id = telOpCtx.ToString();

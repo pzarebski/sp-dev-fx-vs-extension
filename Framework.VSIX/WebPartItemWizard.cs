@@ -26,7 +26,8 @@ namespace Framework.VSIX
 		private string commandString;
 		private bool showWindow;
 		private bool formCancel;
-
+		
+		[Obsolete]
 		TelemetryClient telemetry = new TelemetryClient
 		{
 			InstrumentationKey = Utility.AppInsightsKey
@@ -44,6 +45,7 @@ namespace Framework.VSIX
 
 		public void ProjectItemFinishedGenerating(ProjectItem projectItem)
 		{
+			Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
 			if (!formCancel)
 			{
 				string projectDir = projectItem.ContainingProject.FullName;
@@ -133,8 +135,8 @@ namespace Framework.VSIX
 #if DEBUG
 			TelemetryConfiguration.Active.TelemetryChannel.DeveloperMode = true;
 #endif
-
-			try
+            Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
+            try
 			{
 				//telProps.Add("generator-version", Utility.InstalledGeneratorVersion.ToString());
 				//telemetry.Context.Operation.Id = telOpCtx.ToString();
